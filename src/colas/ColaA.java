@@ -27,14 +27,64 @@ public class ColaA<T> implements ColaADT<T> {
         fin = -1;
     }
 
+    /// add aletrnativo
+//    private boolean add(T dato){
+//        boolean agrega;
+//        int longitud;
+//        
+//        longitud = coleccion.length;
+//        if((fin + 1) % longitud == inicio)
+//            agrega = false;
+//        else{
+//            fin = (fin + 1) % longitud;
+//            coleccion[fin] = dato;
+//            if(inicio == -1)
+//                inicio = 0;  
+//            agrega = true;
+//        }
+//        return agrega; 
+//    }
+    
+    private void expande(){
+        T[] nuevo;
+        int longitud, i;
+        
+        longitud = coleccion.length;
+        nuevo = (T[])new Object[longitud * 2];
+        for(i = 0; i < longitud; i++)
+            nuevo[i] = coleccion[(i + 1) % longitud];
+    }
+    
     @Override
     public void add(T dato) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int longitud;
+        
+        longitud = coleccion.length;
+        if((fin + 1) % longitud == inicio)
+            expande();
+        fin = (fin + 1) % longitud;
+        coleccion[fin] = dato;
+        if(inicio == -1)
+            inicio = 0;  
     }
+  
 
     @Override
     public T revome() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        T elemento;
+        if(isEmpty())
+            elemento = null;
+        else{
+            elemento = coleccion[inicio];
+            coleccion[inicio] = null;
+            if(inicio == fin){
+                inicio = -1;
+                fin = -1;
+            }
+            else
+                inicio = (inicio + 1) % coleccion.length;
+        }
+        return elemento;
     }
 
     @Override

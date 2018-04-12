@@ -5,12 +5,29 @@
  */
 package colas;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author hca
  */
 public class Colas {
 
+    public static<T> void invierteElementos(ColaADT<T> cola){
+        ArrayList<T> auxiliar;
+        int i;
+        
+        try{
+            auxiliar = new ArrayList();
+            while(!cola.isEmpty())
+                auxiliar.add(cola.revome());
+            for()
+        }catch(NullPointerException e){
+            
+        }
+        
+        
+    }
     /**
      * @param args the command line arguments
      */
