@@ -7,7 +7,7 @@ package colas;
 
 /**
  *
- * @author hca
+ * @author Regina Vazquez
  */
 public class ColaA<T> implements ColaADT<T> {
     private int inicio;
@@ -70,7 +70,7 @@ public class ColaA<T> implements ColaADT<T> {
   
 
     @Override
-    public T revome() {
+    public T remove() {
         T elemento;
         if(isEmpty())
             elemento = null;

@@ -11,7 +11,7 @@ package colas;
  */
 public interface ColaADT<T> {
     void add(T dato);
-    T revome();
+    T remove();
     boolean isEmpty();
     T showPrimero();
     
