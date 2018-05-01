@@ -40,21 +40,23 @@ public class Colas {
      * @param cola: generica 
      */
     public static<T> void quitaRepetidos(ColaADT<T> cola){
-        ColaADT<T> nuevaCola;
-        T elementoPasado;
+        ColaADT<T> auxiliar;
+        T elementoPasado, elemento;
         
         try{
             if(!cola.isEmpty()){
-                nuevaCola = new ColaA<>();
-                nuevaCola.add(cola.remove());
-                elementoPasado = nuevaCola.showPrimero();
+                auxiliar = new ColaA<>();
+                elementoPasado = cola.remove();
+                auxiliar.add(elementoPasado);
                 while(!cola.isEmpty()){
-                    if(!cola.showPrimero().equals(elementoPasado)){
-                        elementoPasado = cola.remove();
-                        nuevaCola.add(elementoPasado);
+                    elemento = cola.remove();
+                    if(!elemento.equals(elementoPasado)){
+                        elementoPasado = elemento                                                                                                                                         ;
+                        auxiliar.add(elementoPasado);
                     }
                 }
-                cola = nuevaCola;
+                while(!auxiliar.isEmpty())
+                    cola.add(auxiliar.remove());
             }   
         }catch(NullPointerException e){
             
@@ -70,16 +72,19 @@ public class Colas {
      * @param cola 
      */
     public static<T> void eliminaRecurrenciasDe(T elemento, ColaADT<T> cola){
-        ColaADT<T> nuevaCola;
+        ColaADT<T> auxiliar;
+        T elementoEvaluado;
         
         try{
             if(!cola.isEmpty()){
-                nuevaCola = new ColaA<>();
+                auxiliar = new ColaA<>();
                 while(!cola.isEmpty()){
-                    if(!cola.showPrimero().equals(elemento))
-                        nuevaCola.add(cola.remove());
+                    elementoEvaluado = cola.remove();
+                    if(!elementoEvaluado.equals(elemento))
+                        auxiliar.add(elementoEvaluado);
                 }
-                cola = nuevaCola;
+                while(!auxiliar.isEmpty())
+                    cola.add(auxiliar.remove());
             }
             
         }catch(NullPointerException e){
@@ -87,11 +92,57 @@ public class Colas {
         }
     }
     
+    public static<T> String toString(ColaADT<T> cola){
+        ColaADT<T> auxiliar;
+        StringBuilder sb;
+        T elemento;
+        String cadena;
+
+        auxiliar = new ColaA<>();
+        sb = new StringBuilder();
+        try{
+            while(!cola.isEmpty()){
+                elemento = cola.remove();
+                sb.append(elemento + "   ");
+                auxiliar.add(elemento);
+            }
+            while(!auxiliar.isEmpty())
+                cola.add(auxiliar.remove());
+            cadena = sb.toString();
+        }catch(NullPointerException e){
+            cadena = null;
+        }
+        return cadena;    
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        ColaA<Integer> cola;
+        
+        cola = new ColaA<>();
+        
+        cola.add(3);
+        for(int i = 0; i < 21; i++){
+            cola.add(i);
+        }
+        cola.add(20);
+        cola.add(20);
+        cola.add(20);
+        cola.add(3);
+        
+        System.out.println("cola original: " + toString(cola));
+        invierteElementos(cola);
+        System.out.println("cola invertida: " + toString(cola));
+        quitaRepetidos(cola);
+        System.out.println("cola sin repetidos: " + toString(cola));
+        eliminaRecurrenciasDe(3, cola);
+        System.out.println("cola sin recurrencias de 3: " + toString(cola));
+        
+        
+  
     }
     
 }

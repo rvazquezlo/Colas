@@ -52,7 +52,10 @@ public class ColaA<T> implements ColaADT<T> {
         longitud = coleccion.length;
         nuevo = (T[])new Object[longitud * 2];
         for(i = 0; i < longitud; i++)
-            nuevo[i] = coleccion[(i + 1) % longitud];
+            nuevo[i] = coleccion[(inicio + i) % longitud];
+        inicio = 0;
+        fin = longitud - 1;
+        coleccion = nuevo;
     }
     
     @Override
@@ -62,7 +65,7 @@ public class ColaA<T> implements ColaADT<T> {
         longitud = coleccion.length;
         if((fin + 1) % longitud == inicio)
             expande();
-        fin = (fin + 1) % longitud;
+        fin = (fin + 1) % coleccion.length;
         coleccion[fin] = dato;
         if(inicio == -1)
             inicio = 0;  
