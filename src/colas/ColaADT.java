@@ -13,6 +13,6 @@ public interface ColaADT<T> {
     void add(T dato);
     T remove();
     boolean isEmpty();
-    T showPrimero();
+    T showNext();
     
 }

@@ -96,7 +96,7 @@ public class ColaA<T> implements ColaADT<T> {
     }
 
     @Override
-    public T showPrimero() {
+    public T showNext() {
         T object;
         if(!isEmpty())
             object = coleccion[inicio];
